@@ -12,10 +12,46 @@ reduciendo errores, manejando valores faltantes, y asegurando que los datos sean
 
 ## Etapas de preparación y limpieza de los datos
 
-##### Tratamiento de valores duplicados
 
-Se identificaron y eliminaron registros duplicados para asegurar que registro aparezca una sola vez en el dataset. 
+el dataset contiene datos como, compañía, ubicación, industria a la que pertenece la empresa, total de personas despedidas, porcentaje de despedidos, fecha y demás.
+Visualizandose de la siguiente manera.
+
+![Descripción de la imagen](https://github.com/jdcarmonac07/DatacleaningMYSQL/blob/master/imagenes/Imagen1.png)
+
+
+
+
+
+#### Tratamiento de valores duplicados
+
+Se identificaron y eliminaron registros duplicados, Utilicé la función ROW_NUMBER() con PARTITION BY en SQL para identificar filas duplicadas y las eliminé empleando un CTE.
 Esto ayuda a evitar sesgos en el análisis y garantiza que los datos sean únicos y representativos.
+
+
+![Descripción de la imagen](https://github.com/jdcarmonac07/DatacleaningMYSQL/blob/master/imagenes/Imagen2.png)
+
+Donde se eliminan las filas donde row_number > 1
+
+![Descripción de la imagen](https://github.com/jdcarmonac07/DatacleaningMYSQL/blob/master/imagenes/Imagen4.png)
+
+
+##### Normalizacion de datos:
+
+Se estandarizaron nombres de empresas y sectores que tenían variaciones (por ejemplo, "Microsoft" y "microsoft" o "Crypto currency" y "currency").
+Se usaron funciones  como UPPER(), LOWER(), TRIM(), y LIKE.  Se pueden ver ejemplos.
+
+
+![Descripción de la imagen](https://github.com/jdcarmonac07/DatacleaningMYSQL/blob/master/imagenes/Imagen5.png)
+
+
+
+
+Luego se cambio el formato de la columna ´date'  al formato de fecha correspondiente utilizando la funcion STR_TO_DATE()
+
+
+![Descripción de la imagen](https://github.com/jdcarmonac07/DatacleaningMYSQL/blob/master/imagenes/Imagen7.png)
+
+![Descripción de la imagen](https://github.com/jdcarmonac07/DatacleaningMYSQL/blob/master/imagenes/Imagen8.png)
 
 
 ##### Eliminación de Filas con Valores Faltantes:
@@ -27,9 +63,7 @@ Se eliminaron filas con valores críticos faltantes, como el nombre de la empres
 Se transformaron las columnas para asegurar que los datos estuvieran en el formato correcto (e.g., la columna Fecha se convirtió al tipo datetime).
 
 
-##### Corrección de Errores Tipográficos:
 
-Se estandarizaron nombres de empresas y sectores que tenían variaciones (por ejemplo, "Microsoft" y "microsoft").
 
 ##### Normalización de Datos:
 
