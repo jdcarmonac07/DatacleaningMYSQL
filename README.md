@@ -46,41 +46,40 @@ Se usaron funciones  como UPPER(), LOWER(), TRIM(), y LIKE.  Se pueden ver ejemp
 
 
 
-Luego se cambio el formato de la columna ´date'  al formato de fecha correspondiente utilizando la funcion STR_TO_DATE()
+Luego se cambio el formato de la columna ´date'  al formato de fecha correspondiente utilizando la funcion STR_TO_DATE() dado que se encuentra en formato texto
 
 
 ![Descripción de la imagen](https://github.com/jdcarmonac07/DatacleaningMYSQL/blob/master/imagenes/Imagen7.png)
 
-![Descripción de la imagen](https://github.com/jdcarmonac07/DatacleaningMYSQL/blob/master/imagenes/Imagen8.png)
-
-
-##### Eliminación de Filas con Valores Faltantes:
-
-Se eliminaron filas con valores críticos faltantes, como el nombre de la empresa o el porcentaje de despidos.
-
-##### Corrección de Tipos de Datos:
-
-Se transformaron las columnas para asegurar que los datos estuvieran en el formato correcto (e.g., la columna Fecha se convirtió al tipo datetime).
 
 
 
 
-##### Normalización de Datos:
+##### Tratamiento de Valores nulos o en blanco 
 
-Se aseguraron valores coherentes en las columnas de porcentaje y sector, eliminando outliers o transformando valores atípicos para que sean más consistentes.
-Relleno de Valores Faltantes en Columnas Menos Críticas:
+Para manejar los valores vacíos en el dataset como los valores nulos, se utilizó un self join para poblar registros con información disponible de otras filas. 
+Este enfoque permitió completar datos faltantes, en este caso se completaron los registros de la columna 'industry' entendiendose que registros donde se tenga la misma compañia y la misma ubicación 
+logicamente van a pertenecer al mismo tipo de industria
+
+![Descripción de la imagen](https://github.com/jdcarmonac07/DatacleaningMYSQL/blob/master/imagenes/Imagen9.png)
+
+En las columnas 'total_laid_off' y 'percentage_laid_off' si bien no es totalmente adecuado eliminar registros, para efectos del posterior Analisis que se le realizara al dataset,
+se eliminaron los registros en los cuales tanto en la columna  'total_laid_off' como para 'percentage_laid_off' se muestran valores nulos o vacios, 
+ya que son datos no relevantes para el posterior analisis. Adicional a esto, para los registros en los cuales se encontraban valores en la columna 'total_laid_off' pero no para la columna 'percentage_laid_off'
+o viceversa no se encontro maera de poblarlos ya que no se cuenta con una columna que informe el total de empleados antes de. Adicional a esto se elimin la columna row_num ya que esta se utilizo solamente  con el objetivo de identificar elementos duplicados
 
 
-##### Tratamiento de Valores Vacíos
-Para manejar los valores vacíos en el dataset, se utilizó un self join para poblar registros con información disponible de otras filas. 
-Este enfoque permitió completar datos faltantes 
+##  Resultado final 
+
+![Uploading image.png…](https://github.com/jdcarmonac07/DatacleaningMYSQL/blob/master/imagenes/Imagen10.png)
+
 
 ## Archivos del proyecto
 
-layoff_cleaned.csv: Dataset después del proceso de limpieza.
+layoff_cleaned.csv: Archivo CSV después del proceso de limpieza.
 
-layoffs.csv: Dataset original.
+layoffs.csv: Archivo original.
 
-layoffcleaned.sql:  Query en el cual se puede visualizar el código utilizado para poder realizar la limpieza de los datos
+layoffcleaned.sql:  Query en el cual se puede visualizar el código utilizado para la limpieza
 
 README.md: En este archivo se puede encontrar la descripcion del proyecto.
